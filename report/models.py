@@ -13,7 +13,7 @@ class Lab_test(models.Model):
 	units = models.CharField(max_length=15)
 
 	def __str__(self):
-		return self.name;
+		return str(self.name)
 
 
 class Disease(models.Model):
@@ -21,8 +21,7 @@ class Disease(models.Model):
 	tests = models.ManyToManyField(Lab_test)
 
 	def __str__(self):
-		return self.name;
-
+		return str(self.name)
 
 
 class Report(models.Model):
@@ -32,10 +31,13 @@ class Report(models.Model):
 	disease = models.ForeignKey(Disease, on_delete = models.PROTECT)
 
 	def __str__(self):
-		return self.patient.name + "'s report for " + self.disease.name + " on " + (self.date_issued).strftime('%d-%m-%Y');
+		return str(self.patient) + "'s report for " + str(self.disease) + " on " + (self.date_issued).strftime('%d-%m-%Y')
 
 
 class Test_result(models.Model):
 	report = models.ForeignKey(Report, on_delete = models.CASCADE)
-	lab_test = models.ForeignKey(Lab_test, on_delete = models.SET('Test not avilable'))
+	lab_test = models.ForeignKey(Lab_test, on_delete = models.CASCADE)
 	result = models.CharField(max_length=15)
+
+	def __str__(self):
+		return str(self.lab_test) + " : " + str(self.result) + "  " + str(self.lab_test.units)
