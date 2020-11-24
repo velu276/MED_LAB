@@ -15,6 +15,7 @@ from .serializers import (
 
 
 @api_view(['GET',])
+@permission_classes((IsAuthenticated,))
 def report_list_view(request):
 	try:
 		reports = Report.objects.filter(patient=request.user.id)
@@ -27,6 +28,7 @@ def report_list_view(request):
 
 
 @api_view(['GET',])
+@permission_classes((IsAuthenticated,))
 def report_detail_view(request):
 	try:
 		report = Report.objects.get(id=request.GET['id'])
@@ -43,6 +45,7 @@ def report_detail_view(request):
 
 
 @api_view(['GET',])
+@permission_classes((IsAuthenticated,))
 def report_detail_data_view(request):
 	try:
 		report = Report.objects.get(id=request.GET['id'])
@@ -59,6 +62,7 @@ def report_detail_data_view(request):
 
 
 @api_view(['PUT',])
+@permission_classes((IsAuthenticated,))
 def report_update_view(request):
 	try:
 		report = Report.objects.get(id=request.GET['id'])
@@ -81,6 +85,7 @@ def report_update_view(request):
 
 
 @api_view(['DELETE',])
+@permission_classes((IsAuthenticated,))
 def report_delete_view(request):
 	try:
 		report = Report.objects.get(id=request.GET['id'])
@@ -100,6 +105,7 @@ def report_delete_view(request):
 	return Response(data=data)
 
 @api_view(['DELETE',])
+@permission_classes((IsAuthenticated,))
 def test_result_delete_view(request):
 	try:
 		result = Test_result.objects.get(id=request.GET['id'])
@@ -120,6 +126,7 @@ def test_result_delete_view(request):
 
 
 @api_view(['POST',])
+@permission_classes((IsAuthenticated,))
 def report_create_view(request):
 
 	user = request.user
@@ -136,6 +143,7 @@ def report_create_view(request):
 
 
 @api_view(['POST',])
+@permission_classes((IsAuthenticated,))
 def test_result_create_view(request):
 
 	user = request.user
@@ -151,6 +159,7 @@ def test_result_create_view(request):
 
 
 @api_view(['POST',])
+@permission_classes((IsAuthenticated,))
 def lab_test_create_view(request):
 
 	user = request.user
