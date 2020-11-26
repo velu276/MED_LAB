@@ -5,9 +5,27 @@ from accounts.models import *
 
 class ReportSerializer(serializers.ModelSerializer):
 
+	doctor = serializers.SerializerMethodField('get_doctor_name')
+	patient = serializers.SerializerMethodField('get_patient_name')
+	disease = serializers.SerializerMethodField('get_disease_name')
+	date_issued = serializers.SerializerMethodField('get_date')
+
 	class Meta:
 		model = Report
-		fields = ['id', 'doctor', 'patient', 'disease']
+		fields = ['id', 'doctor', 'patient', 'disease', 'date_issued']
+
+	
+	def get_doctor_name(self, report):
+		return report.doctor.name
+
+	def get_patient_name(self, report):
+		return report.patient.name
+
+	def get_disease_name(self, report):
+		return report.disease.name
+
+	def get_date(self, report):
+		return report.date_issued.strftime('%d %b %y')
 
 	
 
