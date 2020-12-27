@@ -17,7 +17,7 @@ def user_registration(request):
 	data = {}
 	if serializer.is_valid():
 		user = serializer.save()
-		data['response'] = 'successfully registered a new user'
+		data['response'] = 'success'
 		data['phone'] = user.phone
 		data['name'] = user.name
 		token = Token.objects.get(user=user).key

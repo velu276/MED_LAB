@@ -18,7 +18,7 @@ from .serializers import (
 @permission_classes((IsAuthenticated,))
 def report_list_view(request):
 	try:
-		reports = Report.objects.all()
+		reports = Report.objects.all().order_by('-date_issued')
 		# reports = Report.objects.filter(patient=request.user.id)
 	except Report.DoesNotExist:
 		return Response(status=status.HTTP_404_NOT_FOUND)
